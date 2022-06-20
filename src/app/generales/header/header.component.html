@@ -1,0 +1,14 @@
+<header *ngIf="estaVisible && esCliente==='cliente'" class="bg-color1 py-5">
+  <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Compra al mejor precio</h1>
+          <p class="lead fw-normal text-white-50 mb-0">En nuestro sitio oficial</p>
+      </div>
+  </div>
+  <app-search></app-search>
+  <div class="container">
+    <input class="form-control mr-sm-2" type="search" placeholder="Buscar por producto" value="">
+    <a href="busqueda.html"><button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button></a>
+  </div>
+</header>
+
