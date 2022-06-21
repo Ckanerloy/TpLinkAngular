@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
 import { BuscarUsuariosService } from './../usuarios/buscar-usuarios.service';
 import { Injectable} from '@angular/core';
 
@@ -5,13 +7,15 @@ import { Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class VisibilidadRolService {
-  private visibilidadCliente: string;
+  private url: string = environment.apiUsuarioURL;
 
   constructor(
-    private buscarUsuariosService:BuscarUsuariosService
+    private http: HttpClient
   ) {
-    this.visibilidadCliente="";
+
   }
 
-
+  public rolActual(){
+    return this.http.get(this.url);
+  }
 }
