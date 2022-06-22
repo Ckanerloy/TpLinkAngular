@@ -1,3 +1,4 @@
+import { ProductosService } from './../home/productos/productos.service';
 import { BuscarUsuariosService } from './../home/usuarios/buscar-usuarios.service';
 import { VisibilidadFooterService } from './../generales/footer/visibilidad/visibilidad-footer.service';
 import { VisibilidadNavService } from '../generales/nav/visibilidad/visibilidad-nav.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private visibilidadNavService: VisibilidadNavService,
     private visibilidadFooterService: VisibilidadFooterService,
     private formBuilder:FormBuilder,
-    private buscarUsuariosService:BuscarUsuariosService
+    private buscarUsuariosService:BuscarUsuariosService,
+    private productosService:ProductosService
   ) {
     this.busqueda=null;
     this.formulario=null;
@@ -52,6 +54,15 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('rol',respuesta.tipoDeRol);
       localStorage.setItem('id',respuesta.id)
       this.buscarUsuariosService.rolVisibilidad(respuesta.tipoDeRol);
+      if(respuesta.tipoDeRol == 'cliente'){
+        console.log(localStorage.getItem('rol'));
+        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
+          this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+        })}else{
+          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
+            this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+          })
+        }
     });
 
   }
