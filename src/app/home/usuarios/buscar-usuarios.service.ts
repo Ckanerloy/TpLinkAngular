@@ -1,4 +1,3 @@
-import { Usuario } from './usuario';
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
@@ -29,9 +28,9 @@ export class BuscarUsuariosService {
     this.notificarCambio();
   }
 
-public consultarUsuario(){
-  return this.http.get(this.url+'/login?user=user_cami&contra=contra12345');
-}
+  public consultarUsuario(usuario:string,contrasenia:string){
+    return this.http.get(this.url+'/login?'+'user='+usuario+'&'+'contra='+contrasenia);
+  }
 
   public rolVisibilidad(rol:string){
     if(rol == "cliente"){

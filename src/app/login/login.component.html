@@ -1,5 +1,5 @@
 <div class="form-signin text-center">
-  <form [formGroup]="formulario!">
+  <form [formGroup]="formulario!" (ngSubmit)="login()">
     <img class="mb-4" src="assets/imagenes/logo.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Iniciar Sección</h1>
 
@@ -17,7 +17,7 @@
         <input type="checkbox" value="remember-me"> Recordar usuario
       </label>
     </div>
-    <a (click)="login()"><button class="w-100 btn btn-lg btn-primary" type="submit">Siguiente</button></a>
+    <a [routerLink]="['/home']" (click)="login()"><button class="w-100 btn btn-lg btn-primary" type="submit">Siguiente</button></a>
     <p class="mt-5 mb-3 text-muted">&copy; 2020–2022</p>
   </form>
 </div>

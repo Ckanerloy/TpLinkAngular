@@ -1,5 +1,6 @@
-import { Usuario } from './usuarios/usuario';
-import { VisibilidadRolService } from './visibilidad-rol/visibilidad-rol.service';
+import { VisibilidadHeaderService } from './../generales/header/visibilidad/visibilidad-header.service';
+import { VisibilidadFooterService } from './../generales/footer/visibilidad/visibilidad-footer.service';
+import { VisibilidadNavService } from './../generales/nav/visibilidad/visibilidad-nav.service';
 import { BuscarUsuariosService } from './usuarios/buscar-usuarios.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,7 +13,10 @@ export class HomeComponent implements OnInit {
   esCliente: string="";
 
   constructor(
-    private buscarUsuariosService: BuscarUsuariosService
+    private buscarUsuariosService: BuscarUsuariosService,
+    private visibilidadNavService:VisibilidadNavService,
+    private visibilidadFooterService:VisibilidadFooterService,
+    private VisibilidadHeaderService:VisibilidadHeaderService
   ) {
     this.esCliente="";
    }
@@ -20,21 +24,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.buscarUsuariosService.cambioDeVisibilidad.subscribe((visibilidadCliente: string) =>{
       this.esCliente = visibilidadCliente;
+      this.visibilidadNavService.hacerVisibleNav();
+      this.visibilidadFooterService.hacerVisibleFooter();
+      if(localStorage.getItem('rol') == 'cliente'){
+        this.VisibilidadHeaderService.hacerVisibleHeader();
+      }
     });
-    //this.buscarUsuariosService.rolVisibilidad();
-    /*this.buscarUsuariosService.consultarUsuario().subscribe((respuesta:any) => {
-      console.log(respuesta._links.rol.href);
-      this.buscarUsuariosService.buscarRol(respuesta._links.rol.href).subscribe((otraRespuesta:any) =>{
-      console.log(otraRespuesta);
-      this.buscarUsuariosService.rolVisibilidad(otraRespuesta.tipoDeRol);
-      console.log(otraRespuesta.tipoDeRol);
-    });
-    })*/
-    this.buscarUsuariosService.consultarUsuario().subscribe((usuario:any) =>{
-      console.log(usuario.tipoDeRol);
-      this.buscarUsuariosService.rolVisibilidad(usuario.tipoDeRol);
-    })
   }
-
 
 }

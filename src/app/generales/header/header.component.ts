@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
     this.buscarUsuariosService.cambioDeVisibilidad.subscribe((visibilidadCliente: string) =>{
       this.esCliente = visibilidadCliente;
     });
-    //this.buscarUsuariosService.rolVisibilidad();
   }
 
 }

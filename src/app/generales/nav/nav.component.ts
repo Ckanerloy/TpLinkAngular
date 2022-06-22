@@ -22,12 +22,14 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.visibilidadNavService.cambioDeVisibilidad.subscribe((estaVisible: boolean) =>{
+      console.log(estaVisible);
       this.estaVisible=estaVisible;
     })
     this.buscarUsuariosService.cambioDeVisibilidad.subscribe((visibilidadCliente: string) =>{
       this.esCliente = visibilidadCliente;
-    });
-    //this.buscarUsuariosService.rolVisibilidad();
+    })
   }
+
+
 
 }

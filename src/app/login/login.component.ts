@@ -1,8 +1,8 @@
-import { VisibilidadFooterService } from '../generales/footer/visibilidad/visibilidad-footer.service';
+import { BuscarUsuariosService } from './../home/usuarios/buscar-usuarios.service';
+import { VisibilidadFooterService } from './../generales/footer/visibilidad/visibilidad-footer.service';
 import { VisibilidadNavService } from '../generales/nav/visibilidad/visibilidad-nav.service';
 import { VisibilidadHeaderService } from '../generales/header/visibilidad/visibilidad-header.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     private visibilidadHeaderService: VisibilidadHeaderService,
     private visibilidadNavService: VisibilidadNavService,
     private visibilidadFooterService: VisibilidadFooterService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private buscarUsuariosService:BuscarUsuariosService
   ) {
     this.busqueda=null;
     this.formulario=null;
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
     this.visibilidadNavService.ocualtarNav();
     this.visibilidadFooterService.ocultarFooter();
     this.inicializarFormulario();
+
+
   }
 
   private inicializarFormulario() {
@@ -44,6 +47,13 @@ export class LoginComponent implements OnInit {
     var contrasenia = this.formulario?.get('contrasenia')?.value;
 
     console.log(usuario + " " + contrasenia);
+
+    this.buscarUsuariosService.consultarUsuario(usuario,contrasenia).subscribe((respuesta:any)=>{
+      localStorage.setItem('rol',respuesta.tipoDeRol);
+      localStorage.setItem('id',respuesta.id)
+      this.buscarUsuariosService.rolVisibilidad(respuesta.tipoDeRol);
+    });
+
   }
 
 }
