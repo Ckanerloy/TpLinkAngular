@@ -17,7 +17,7 @@
         <input type="checkbox" value="remember-me"> Recordar usuario
       </label>
     </div>
-    <a [routerLink]="['/home']" ><button class="w-100 btn btn-lg btn-primary" type="submit">Siguiente</button></a>
+    <a [routerLink]="['/home']" (click)="login()"><button class="w-100 btn btn-lg btn-primary" type="submit">Siguiente</button></a>
     <p class="mt-5 mb-3 text-muted">&copy; 2020–2022</p>
   </form>
 </div>

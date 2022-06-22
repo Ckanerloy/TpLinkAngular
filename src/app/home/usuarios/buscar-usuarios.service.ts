@@ -33,6 +33,7 @@ export class BuscarUsuariosService {
   }
 
   public rolVisibilidad(rol:string|null){
+    console.log(localStorage.getItem('rol'));
     if(rol == "cliente"){
       this.hacerVisiblibilidadCliente();
     }else{

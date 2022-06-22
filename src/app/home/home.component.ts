@@ -5,7 +5,7 @@ import { VisibilidadFooterService } from './../generales/footer/visibilidad/visi
 import { VisibilidadNavService } from './../generales/nav/visibilidad/visibilidad-nav.service';
 import { BuscarUsuariosService } from './usuarios/buscar-usuarios.service';
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
     private visibilidadNavService:VisibilidadNavService,
     private visibilidadFooterService:VisibilidadFooterService,
     private VisibilidadHeaderService:VisibilidadHeaderService,
-    private productosService:ProductosService
+    private productosService:ProductosService,
+    private router:Router
   ) {
     this.esCliente="";
    }
@@ -34,9 +35,7 @@ export class HomeComponent implements OnInit {
         this.VisibilidadHeaderService.hacerVisibleHeader();
       }
     });
-    this.productosService.cambioDeProductos.subscribe((productos:any) =>{
-      this.productos=productos;
-    });
+
 
     this.buscarUsuariosService.rolVisibilidad(localStorage.getItem('rol'));
       if(localStorage.getItem('rol') == 'cliente'){
@@ -44,10 +43,15 @@ export class HomeComponent implements OnInit {
         this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
           this.productosService.cambiarProductos(listaProductos._embedded.productoes);
         })}else{
+          console.log(localStorage.getItem('rol'));
           this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
             this.productosService.cambiarProductos(listaProductos._embedded.productoes);
           })
         }
+
+    this.productosService.cambioDeProductos.subscribe((productos:any) =>{
+        this.productos=productos;
+      });
   }
 
 }

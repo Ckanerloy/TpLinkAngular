@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProductosService } from './../home/productos/productos.service';
 import { BuscarUsuariosService } from './../home/usuarios/buscar-usuarios.service';
 import { VisibilidadFooterService } from './../generales/footer/visibilidad/visibilidad-footer.service';
@@ -51,8 +52,18 @@ export class LoginComponent implements OnInit {
 
     this.buscarUsuariosService.consultarUsuario(usuario,contrasenia).subscribe((respuesta:any)=>{
       localStorage.setItem('rol',respuesta.tipoDeRol);
-      localStorage.setItem('id',respuesta.id)
-
+      localStorage.setItem('id',respuesta.id);
+      this.buscarUsuariosService.rolVisibilidad(localStorage.getItem('rol'));
+      if(localStorage.getItem('rol') == 'cliente'){
+        console.log(localStorage.getItem('rol'));
+        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
+          this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+        })}else{
+          console.log(localStorage.getItem('rol'));
+          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
+            this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+          })
+        }
     });
 
   }
