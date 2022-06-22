@@ -13,7 +13,12 @@
             <a [routerLink]="['/carritoDeCompras']" ><button class="btn btn-outline-light" type="submit">
                   <i class="bi-cart-fill me-1"></i>
                   Cart
-                  <span class="badge bg-light text-black ms-1 rounded-pill">0</span>
+            </button></a>
+          </form>
+          <form *ngIf="esCliente==='vendedor'" class="d-flex" >
+            <a [routerLink]="['/productos']"><button class="btn btn-outline-light" type="submit">
+                  <i class="bi-cart-fill me-1"></i>
+                  Nuevo Producto
             </button></a>
           </form>
       </div>

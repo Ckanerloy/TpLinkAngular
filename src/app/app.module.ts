@@ -7,6 +7,7 @@ import { GeneralesModule } from './generales/generales.module';
 import { LoginComponent } from './login/login.component';
 import { CarritoDeComprasComponent } from './carrito-de-compras/carrito-de-compras.component';
 import { HomeComponent } from './home/home.component';
+import { AgregarProductoComponent } from './agregar-producto/agregar-producto.component';
 //import { NgxPaginationModule } from 'ngx-pagination'; // NGX-PAGINATION IMPORTS
 
 @NgModule({
@@ -14,7 +15,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     LoginComponent,
     CarritoDeComprasComponent,
-    HomeComponent
+    HomeComponent,
+    AgregarProductoComponent
    ],
   imports: [
     BrowserModule,
