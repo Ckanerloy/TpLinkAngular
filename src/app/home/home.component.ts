@@ -37,5 +37,17 @@ export class HomeComponent implements OnInit {
     this.productosService.cambioDeProductos.subscribe((productos:any) =>{
       this.productos=productos;
     });
+
+    this.buscarUsuariosService.rolVisibilidad(localStorage.getItem('rol'));
+      if(localStorage.getItem('rol') == 'cliente'){
+        console.log(localStorage.getItem('rol'));
+        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
+          this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+        })}else{
+          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
+            this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+          })
+        }
   }
+
 }

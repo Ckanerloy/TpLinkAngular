@@ -31,12 +31,4 @@ export class NavComponent implements OnInit {
       this.esCliente = visibilidadCliente;
     })
   }
-
-  public obtenerItems(){
-    this.itemsService.consultarItems(localStorage.getItem('id')).subscribe((resultado:any)=>{
-      this.itemsService.cambiarItems(resultado.itemsCompras);
-      localStorage.setItem('idCarrito',resultado.id);
-    })
-  }
-
 }

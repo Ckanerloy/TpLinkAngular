@@ -32,7 +32,7 @@ export class BuscarUsuariosService {
     return this.http.get(this.url+'/login?'+'user='+usuario+'&'+'contra='+contrasenia);
   }
 
-  public rolVisibilidad(rol:string){
+  public rolVisibilidad(rol:string|null){
     if(rol == "cliente"){
       this.hacerVisiblibilidadCliente();
     }else{

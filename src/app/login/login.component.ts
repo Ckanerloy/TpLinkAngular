@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
     this.visibilidadNavService.ocualtarNav();
     this.visibilidadFooterService.ocultarFooter();
     this.inicializarFormulario();
-
-
   }
 
   private inicializarFormulario() {
@@ -40,6 +38,7 @@ export class LoginComponent implements OnInit {
       usuario: ['', Validators.required],
       contrasenia: ['', Validators.required]
     });
+
   }
 
   login(){
@@ -53,16 +52,7 @@ export class LoginComponent implements OnInit {
     this.buscarUsuariosService.consultarUsuario(usuario,contrasenia).subscribe((respuesta:any)=>{
       localStorage.setItem('rol',respuesta.tipoDeRol);
       localStorage.setItem('id',respuesta.id)
-      this.buscarUsuariosService.rolVisibilidad(respuesta.tipoDeRol);
-      if(respuesta.tipoDeRol == 'cliente'){
-        console.log(localStorage.getItem('rol'));
-        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
-          this.productosService.cambiarProductos(listaProductos._embedded.productoes);
-        })}else{
-          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
-            this.productosService.cambiarProductos(listaProductos._embedded.productoes);
-          })
-        }
+
     });
 
   }

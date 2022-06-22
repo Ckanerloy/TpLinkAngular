@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carrito-de-compras.component.css']
 })
 export class CarritoDeComprasComponent implements OnInit {
-  private items:any;
+   items:any;
 
   constructor(
     private visibilidadHeaderService: VisibilidadHeaderService,
@@ -20,6 +20,10 @@ export class CarritoDeComprasComponent implements OnInit {
 
     this.itemsService.cambioDeItems.subscribe((items:any)=>{
       this.items=items;
+    })
+    this.itemsService.consultarItems(localStorage.getItem('id')).subscribe((resultado:any)=>{
+      this.itemsService.cambiarItems(resultado.itemsCompras);
+      localStorage.setItem('idCarrito',resultado.id);
     })
   }
 
