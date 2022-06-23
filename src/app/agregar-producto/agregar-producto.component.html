@@ -1,6 +1,6 @@
 <div class="formulario1">
   <p> Registre un nuevo producto</p>
-  <form [formGroup]="formulario!" class="row g-3">
+  <form [formGroup]="formulario!" class="row g-3" (ngSubmit)="guardarProducto()">
         <div class="col-md-6">
           <label for="inputNombrel4" class="form-label">Nombre</label>
           <input type="nombre" class="form-control" id="inputNombre4" formControlName="nombre">
@@ -45,7 +45,9 @@
           </div>
 
         <div class="col-12">
-          <button type="submit" class="btn btn-primary" (click)="modicarPorducto()">Registrar</button>
+          <a [routerLink]="['/home']" (click)="guardarProducto()">
+          <button type="submit" class="btn btn-primary" >Registrar</button>
+        </a>
         </div>
   </form>
 </div>

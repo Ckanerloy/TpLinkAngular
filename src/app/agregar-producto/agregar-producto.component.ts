@@ -1,3 +1,5 @@
+import { ProductosService } from './../home/productos/productos.service';
+import { InsertarProductoService } from './insertar-producto/insertar-producto.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +11,9 @@ export class AgregarProductoComponent implements OnInit {
   formulario: FormGroup|null;
 
   constructor(
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private insertarProductoService:InsertarProductoService,
+    private productosService:ProductosService
   ) {
     this.formulario=null;
    }
@@ -30,9 +34,7 @@ export class AgregarProductoComponent implements OnInit {
     });
   }
 
-  modicarPorducto(){
-    alert('Se han guardado los cambios');
-
+  guardarProducto(){
     var nombre = this.formulario?.get('nombre')?.value;
     var stock = this.formulario?.get('stock')?.value;
     var descripcion = this.formulario?.get('descripcion')?.value;
@@ -42,5 +44,17 @@ export class AgregarProductoComponent implements OnInit {
     var imagen = this.formulario?.get('imagen')?.value;
 
     console.log(nombre + " " + stock + " " + descripcion + " " + precio + " " +  " " + estaEnDolares + " " + imagen);
+    this.insertarProductoService.cargaProducto(precio,descripcion,nombre,stock,1,estaEnDolares,imagen).subscribe(()=>{
+      if(localStorage.getItem('rol') == 'cliente'){
+        console.log(localStorage.getItem('rol'));
+        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
+          this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+        })}else{
+          console.log(localStorage.getItem('rol'));
+          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
+            this.productosService.cambiarProductos(listaProductos._embedded.productoes);
+          })
+        }
+    });
   }
 }
