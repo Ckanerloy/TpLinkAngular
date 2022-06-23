@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carrito-de-compras.component.css']
 })
 export class CarritoDeComprasComponent implements OnInit {
+   carrito:any;
    items:any;
+   precioSinDescuento:any;
+   precioConDescuento:any
 
   constructor(
     private visibilidadHeaderService: VisibilidadHeaderService,
@@ -18,12 +21,15 @@ export class CarritoDeComprasComponent implements OnInit {
     this.visibilidadHeaderService.ocualtarHeader();
 
 
-    this.itemsService.cambioDeItems.subscribe((items:any)=>{
-      this.items=items;
+    this.itemsService.cambioDeItems.subscribe((carrito:any)=>{
+      this.carrito=carrito;
+      this.items=this.carrito.itemsCompras;
+      this.precioSinDescuento=this.carrito.precioTotalSinDescuento;
+      this.precioConDescuento=this.carrito.precioTotalConDescuento;
     })
     this.itemsService.consultarItems(localStorage.getItem('id')).subscribe((resultado:any)=>{
-      this.itemsService.cambiarItems(resultado.itemsCompras);
-      localStorage.setItem('idCarrito',resultado.id);
+      this.itemsService.cambiarItems(resultado);
+      //localStorage.setItem('idCarrito',resultado.id);
     })
   }
 
