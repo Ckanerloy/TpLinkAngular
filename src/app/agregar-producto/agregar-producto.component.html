@@ -20,10 +20,7 @@
         <div class="col-md-4">
           <label for="inputState" class="form-label">Proveedor</label>
           <select id="inputState" class="form-select" formControlName="proveedor">
-            <option selected>Elegir...</option>
-            <option value="1" >Proveedor1</option>
-            <option value="2" >Proveedor2</option>
-            <option value="3" >Proveedor3</option>
+            <option value={{proveedor.id}} *ngFor="let proveedor of proveedores">{{proveedor.descripcion}}</option>
           </select>
         </div>
         <div class="col-12">

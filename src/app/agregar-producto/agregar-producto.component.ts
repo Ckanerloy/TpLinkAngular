@@ -1,3 +1,4 @@
+import { ProveedorService } from './proveedor/proveedor.service';
 import { ProductosService } from './../home/productos/productos.service';
 import { InsertarProductoService } from './insertar-producto/insertar-producto.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,17 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgregarProductoComponent implements OnInit {
   formulario: FormGroup|null;
+  proveedores:any;
 
   constructor(
     private formBuilder:FormBuilder,
     private insertarProductoService:InsertarProductoService,
-    private productosService:ProductosService
+    private productosService:ProductosService,
+    private proveedorService:ProveedorService
   ) {
     this.formulario=null;
    }
 
   ngOnInit(): void {
     this.inicializarFormulario();
+
+    this.proveedorService.getProveedores().subscribe((resultado:any)=>{
+      this.proveedores=resultado._embedded.proveedors;
+    })
   }
 
   private inicializarFormulario() {
