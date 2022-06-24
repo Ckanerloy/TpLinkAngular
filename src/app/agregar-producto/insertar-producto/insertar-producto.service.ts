@@ -19,11 +19,11 @@ export class InsertarProductoService {
   public cargaProducto(precio:string,descripcion:string,nombre:string,stock:number,proveedor:number,estaEnDolares:string,imagen:string){
     var monedaBoolean;
     if(estaEnDolares==='pesos'){
-      monedaBoolean=true;
-    }else{
       monedaBoolean=false;
+    }else{
+      monedaBoolean=true;
     }
-    //http://localhost:8080/vendedores/b38e282f-f3f5-485a-ac5f-51cf73e1d784/productos
+    //http://localhost:8080/vendedor/b38e282f-f3f5-485a-ac5f-51cf73e1d784/productos
     var idVendedor = localStorage.getItem('id');
     return this.http.post(this.url+'/vendedor/'+idVendedor+'/productos',
       {
@@ -32,7 +32,7 @@ export class InsertarProductoService {
         'precio':precio,
         'stock':stock,
         'proveedorID':proveedor,
-        'foto':imagen,
+        'imagen':imagen,
         'estaEnDolares':monedaBoolean
     }
     )

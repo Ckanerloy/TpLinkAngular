@@ -8,7 +8,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class ItemsService {
   @Output() cambioDeItems: EventEmitter<string>;
   private url: string = environment.apiUsuarioURL;
-  private items:any;
+  private carrito:any;
 
   constructor(
     private http:HttpClient
@@ -21,13 +21,13 @@ export class ItemsService {
     return this.http.get(this.url+'/cliente/'+id+'/carritoDeCompras');
   }
 
-  public cambiarItems(otrosItems:any){
-    this.items=otrosItems;
+  public cambiarItems(otrocarrito:any){
+    this.carrito=otrocarrito;
     this.notificar();
   }
 
   public notificar(){
-    this.cambioDeItems.emit(this.items);
+    this.cambioDeItems.emit(this.carrito);
   }
 
 }

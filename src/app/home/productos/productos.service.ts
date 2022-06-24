@@ -16,12 +16,12 @@ export class ProductosService {
     this.cambioDeProductos= new EventEmitter();
   }
 
-  public consultarProductoCliente(){
-    return this.http.get(this.url+'/productos');
+  public consultarProductoCliente(nro:any){
+    return this.http.get(this.url+'/productos'+'?page='+nro+'&size=8');
   }
   //http://localhost:8080/vendedores/eec7884f-0245-47d1-b7d0-bebe4f942d8c/productosParaVender
-  public consultarProductoVendedor(id:string|null){
-    return this.http.get(this.url+'/vendedores/'+id+'/productosParaVender');
+  public consultarProductoVendedor(id:string|null,nroPag:any){
+    return this.http.get(this.url+'/vendedores/'+id+'/productosParaVender'+'?page='+nroPag+'&size=8');
   }
 
   public cambiarProductos(otrosProductos:any){

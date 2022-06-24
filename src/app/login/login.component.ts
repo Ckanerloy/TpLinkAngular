@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
       this.buscarUsuariosService.rolVisibilidad(localStorage.getItem('rol'));
       if(localStorage.getItem('rol') == 'cliente'){
         console.log(localStorage.getItem('rol'));
-        this.productosService.consultarProductoCliente().subscribe((listaProductos:any)=>{
+        this.productosService.consultarProductoCliente(0).subscribe((listaProductos:any)=>{
           this.productosService.cambiarProductos(listaProductos._embedded.productoes);
         })}else{
           console.log(localStorage.getItem('rol'));
-          this.productosService.consultarProductoVendedor(localStorage.getItem('id')).subscribe((listaProductos:any) =>{
+          this.productosService.consultarProductoVendedor(localStorage.getItem('id'),0).subscribe((listaProductos:any) =>{
             this.productosService.cambiarProductos(listaProductos._embedded.productoes);
           })
         }
