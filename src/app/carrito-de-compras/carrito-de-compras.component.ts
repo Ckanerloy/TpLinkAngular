@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ItemsService } from './../generales/nav/items/items.service';
 import { VisibilidadHeaderService } from './../generales/header/visibilidad/visibilidad-header.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,12 +11,20 @@ export class CarritoDeComprasComponent implements OnInit {
    carrito:any;
    items:any;
    precioSinDescuento:any;
-   precioConDescuento:any
+   precioConDescuento:any;
+   formularioMedio: FormGroup|null;
+   formularioCupon: FormGroup|null;
+   codigoCuponProveedor:string;
 
   constructor(
     private visibilidadHeaderService: VisibilidadHeaderService,
-    private itemsService:ItemsService
-  ) { }
+    private itemsService:ItemsService,
+    private formBuilder:FormBuilder
+  ) {
+    this.formularioMedio=null;
+    this.formularioCupon=null;
+    this.codigoCuponProveedor="";
+  }
 
   ngOnInit(): void {
     this.visibilidadHeaderService.ocualtarHeader();
@@ -31,6 +40,29 @@ export class CarritoDeComprasComponent implements OnInit {
       this.itemsService.cambiarItems(resultado);
       //localStorage.setItem('idCarrito',resultado.id);
     })
+    this.inicializarFormularioMedio();
+    this.inicializarFormularioCupon();
   }
 
+  public inicializarFormularioMedio(){
+    this.formularioMedio = this.formBuilder.group({
+      medioDePago: ['', Validators.required]
+    });
+  }
+
+  guardarMedioDePago(){
+    var medioDePago = this.formularioMedio?.get('medioDePago')?.value;
+    console.log(medioDePago);
+  }
+
+  public inicializarFormularioCupon(){
+    this.formularioCupon = this.formBuilder.group({
+      cuponProveedor: ['', Validators.required]
+    });
+  }
+
+  guardarCupon(){
+    var cuponProveedor = this.formularioMedio?.get('cuponProveedor')?.value;
+    console.log(this.codigoCuponProveedor);
+  }
 }

@@ -43,53 +43,34 @@
     </div>
 
         <div class="card mb-4">
+          <form [formGroup]="formularioCupon!">
           <div class="card-body p-4 d-flex flex-row">
             <div class="form-outline flex-fill">
-              <input type="text" id="form1" class="form-control form-control-lg" />
-              <label class="form-label" for="form1">Discound code</label>
+
+              <input type="text" id="form1" class="form-control form-control-lg" [(ngModel)]="codigoCuponProveedor" formControlName="cuponProveedor">
+              <!--<label class="form-label" for="form1">Discound code</label>-->
             </div>
-            <button type="button" class="btn btn-outline-warning btn-lg ms-3">Apply</button>
+            <button type="button" class="btn btn-outline-warning btn-lg ms-3" (click)="guardarCupon()">Apply</button>
           </div>
+        </form>
         </div>
 
+        <div class="card mb-4">
+          <form [formGroup]="formularioMedio!">
+          <div class="card-body p-4 d-flex flex-row">
+            <div class="form-outline flex-fill">
+              <option selected>Medios de pago</option>
+              <select id="inputState" class="form-select" formControlName="medioDePago">
+                <option value="EFECTIVO" >Efectivo</option>
+                <option value="TARJETA_CREDITO" >Tarjeta de crédito</option>
+                <option value="TARJETA_DEBITO" >Tarjeta de débito</option>
+              </select>
 
-        <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                <form>
-                  <div class="d-flex flex-row pb-3">
-                    <div class="d-flex align-items-center pe-2">
-                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1v"
-                        value="" aria-label="..." checked />
-                    </div>
-                    <div class="rounded border w-100 p-3">
-                      <p class="d-flex align-items-center mb-0">
-                        <i class="bi bi-credit-card fa-2x text-dark pe-2"></i>Tarjeta de crédito
-                      </p>
-                    </div>
-                  </div>
-                  <div class="d-flex flex-row pb-3">
-                    <div class="d-flex align-items-center pe-2">
-                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2v"
-                        value="" aria-label="..." />
-                    </div>
-                    <div class="rounded border w-100 p-3">
-                      <p class="d-flex align-items-center mb-0">
-                        <i class="bi bi-credit-card-fill fa-2x fa-lg text-dark pe-2"></i>Tarjeta de Débito
-                      </p>
-                    </div>
-                  </div>
-                  <div class="d-flex flex-row">
-                    <div class="d-flex align-items-center pe-2">
-                      <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3v"
-                        value="" aria-label="..." />
-                    </div>
-                    <div class="rounded border w-100 p-3">
-                      <p class="d-flex align-items-center mb-0">
-                        <i class="bi bi-cash-coin fa-2x fa-lg text-dark pe-2"></i>Efectivo
-                      </p>
-                    </div>
-                  </div>
-                </form>
-              </div>
+            </div>
+            <button type="button" class="btn btn-outline-warning btn-lg ms-3" (click)="guardarMedioDePago()">Elegir</button>
+          </div>
+        </form>
+        </div>
 
      <!-- EL TOTAL CON DESCUENTO-->
      <div class="card mb-4 ">
