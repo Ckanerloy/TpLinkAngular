@@ -4,7 +4,7 @@
         <div class="col mb-5" *ngFor="let producto of productos">
           <div class="card h-100">
               <!-- Product image-->
-              <img class="card-img-top" src={{producto.imagen}} alt="..." />
+              <img id="img" class="card-img-top" src={{producto.imagen}} alt="..." />
               <!-- Product details-->
               <div class="card-body p-4" >
                   <div class="text-center">
@@ -16,18 +16,20 @@
                       <h6 class="fw-bolder">{{producto.descripcion}}</h6>
 
                       <div class="formulario">
-                        <form id="formCantidad">
+                        <form id="formCantidad" [formGroup]="formulario!" (ngSubmit)="agregarItem(producto.id)">
                           <div class="form-cantidad">
-                            <input type="text" class="form-cantidad" id="cantidad" size="5" placeholder="Cantidad">
+                            <input type="text" class="form-cantidad" id="cantidad" size="5" placeholder="Cantidad" formControlName="cantidad">
                           </div>
+                          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"  (click)="agregarItem(producto.id)">Add to cart</a></div>
+
+                        </div>
                         </form>
                       </div>
                   </div>
               </div>
               <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-              </div>
+
           </div>
         </div>
 
