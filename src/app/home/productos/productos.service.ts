@@ -17,11 +17,11 @@ export class ProductosService {
   }
 
   public consultarProductoCliente(nro:any){
-    return this.http.get(this.url+'/productos'+'?page='+nro+'&size=8');
+    return this.http.get(this.url+'/productos'+'?page='+nro);
   }
   //http://localhost:8080/vendedores/eec7884f-0245-47d1-b7d0-bebe4f942d8c/productosParaVender
   public consultarProductoVendedor(id:string|null,nroPag:any){
-    return this.http.get(this.url+'/vendedores/'+id+'/productosParaVender'+'?page='+nroPag+'&size=8');
+    return this.http.get(this.url+'/vendedores/'+id+'/productosParaVender'+'?page='+nroPag);
   }
 
   public cambiarProductos(otrosProductos:any){
